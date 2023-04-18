@@ -7,4 +7,5 @@ edition = "2021"
 
 [dependencies]
 debug_print = "1.0.0"
+glib = "0.17.8"
 gtk = "0.17.1"

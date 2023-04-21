@@ -1,26 +1,31 @@
+use std::fs;
+
 use debug_print::debug_println;
 
-use gtk::{CssProvider, StyleContext, Window, WindowType, gdk::ModifierType, gdk, prelude::*};
+use gtk::{gdk::{self, ModifierType}, CssProvider, Orientation::Vertical, Window, WindowType, prelude::*};
 
 fn main() {
-    gtk::init();
+
+    gtk::init().expect("Couldn't initialize GTK");
 
     let window = gtk::Window::new(WindowType::Toplevel);
+    let vbox = gtk::Box::new(Vertical, 0);
     
-
     window.connect_delete_event(|_, _| {
         gtk::main_quit();
         Inhibit(false)
     });
 
-    let css_provider = CssProvider::new();
-    let css = "
-    window {
-        background-color: #555555;
-    }
-    ";
+    let user_css_path = dirs::config_dir().unwrap().join("blankwindow.css");
 
-    css_provider.load_from_data(css.as_bytes()).expect("Failed to load CSS");
+    let css_content = fs::read_to_string(user_css_path).unwrap_or("".to_owned());
+    let css_bytes = match css_content.as_str() {
+        "" => include_bytes!("default-style.css"),
+        x => x.as_bytes()
+    };
+    
+    let css_provider = CssProvider::new();
+    css_provider.load_from_data(css_bytes).expect("Failed to load CSS");
     gtk::StyleContext::add_provider_for_screen(
         &gdk::Screen::default().expect("Error initializing gtk css provider"),
         &css_provider,
@@ -43,6 +48,8 @@ fn main() {
         }
         Inhibit(false)
     });
+
+    window.add(&vbox);
 
     window.show_all();
 

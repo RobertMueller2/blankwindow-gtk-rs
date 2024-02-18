@@ -13,7 +13,7 @@ fn main() {
     
     window.connect_delete_event(|_, _| {
         gtk::main_quit();
-        glib::Propagation::Proceed
+        gtk::glib::Propagation::Proceed
     });
 
     let user_css_path = dirs::config_dir().unwrap().join("blankwindow.css");
@@ -46,7 +46,7 @@ fn main() {
                 _ => {}
             }
         }
-        glib::Propagation::Proceed
+        gtk::glib::Propagation::Proceed
     });
 
     window.add(&vbox);

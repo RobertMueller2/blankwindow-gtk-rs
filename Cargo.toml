@@ -7,6 +7,6 @@ edition = "2021"
 
 [dependencies]
 debug_print = "1.0.0"
-dirs = "5.0.1"
+dirs = "6.0.0"
 glib = "0.20.7"
 gtk = "0.18.2"

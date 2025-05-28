@@ -1,7 +1,7 @@
 window {
-   background: transparent;
+    background: transparent;
 }
 
 window > box {
-   background-color: rgba(100, 100, 100, 0.75);
+    background-color: rgba(100, 100, 100, 0.75);
 }

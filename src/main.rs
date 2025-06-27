@@ -10,8 +10,8 @@ use gtk::{
 };
 
 fn usage(exe: String) {
-    println!("{:?} --help", exe);
-    println!("{:?} --app-id <app id>", exe);
+    println!("{exe:?} --help");
+    println!("{exe:?} --app-id <app id>");
 }
 
 fn main() -> glib::ExitCode {
